@@ -1,6 +1,7 @@
 from django.test import TestCase
 from .models import Item
 
+
 # Create your tests here.
 class TestViews(TestCase):
 
@@ -40,7 +41,8 @@ class TestViews(TestCase):
 
     def test_can_edit_item(self):
         item = Item.objects.create(name='Test Todo Item')
-        response = self.client.post(f'/edit/{item.id}', {'name': 'Updated Name'})
+        response = self.client.post(
+            f'/edit/{item.id}', {'name': 'Updated Name'})
         self.assertRedirects(response, '/')
         updated_item = Item.objects.get(id=item.id)
         self.assertEqual(updated_item.name, 'Updated Name')
